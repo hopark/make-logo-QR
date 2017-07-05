@@ -1,4 +1,4 @@
-package LogoQR;
+package com.LogoQR;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
