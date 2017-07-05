@@ -7,34 +7,27 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-class CompareImage {
-	BufferedImage imageQR, imageIcon, imageNew, imageNew2;
-	int width;
-	int height;
-	int unit;
-
-	public CompareImage() {
+class LogoQR {
+	static void combineImage(QRcode qr, Logo lg) {
+		BufferedImage imageQR = qr.getImage();
+		BufferedImage imageLogo = lg.getImage();
+		int size = lg.getSize();
+		
+		BufferedImage imageNew = null, imageNew2 = null;
+		int unit;
 		try {
-			File inputQR = new File("C:\\Users\\PARK\\Desktop\\a\\3.png");
-			File inputIcon = new File("C:\\Users\\PARK\\Desktop\\a\\b.png");
+			imageNew = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+			imageNew2 = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 
-			imageQR = ImageIO.read(inputQR);
-			imageIcon = ImageIO.read(inputIcon);
-			width = imageQR.getWidth();
-			height = imageQR.getHeight();
-			imageNew = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			imageNew2 = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-			unit = width * height / 100;
+			unit = size*size / 100;
 
 			int count = 0;
 
-			for (int i = 0; i < height; i++) {
-
-				for (int j = 0; j < width; j++) {
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < size; j++) {
 					count++;
 					Color cq = new Color(imageQR.getRGB(j, i));
-					Color ci = new Color(imageIcon.getRGB(j, i));
+					Color ci = new Color(imageLogo.getRGB(j, i));
 					float luminanceQ = (cq.getRed() * 0.2126f + cq.getGreen() * 0.7152f + cq.getBlue() * 0.0722f);
 
 					int red = ci.getRed();
@@ -105,18 +98,22 @@ class CompareImage {
 			e.printStackTrace();
 		}
 
-		File outputNew = new File("C:\\Users\\PARK\\Desktop\\a\\5b1777.png");
-		File outputNew2 = new File("C:\\Users\\PARK\\Desktop\\a\\5b27777.png");
+		File outputNew = new File("C:\\Users\\PARK\\Desktop\\a\\result\\1.png");
+		File outputNew2 = new File("C:\\Users\\PARK\\Desktop\\a\\result\\2.png");
 		try {
 			ImageIO.write(imageNew, "png", outputNew);
 			ImageIO.write(imageNew2, "png", outputNew2);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	static public void main(String args[]) throws Exception {
-		CompareImage obj = new CompareImage();
+		String information = "http://www.naver.com/";
+		String filePath = "C:\\Users\\PARK\\Desktop\\a\\b2.png";
+		
+		Logo lg = new Logo(filePath);
+		QRcode qr = new QRcode(lg.getSize(), information);
+		combineImage(qr, lg);
 	}
 }
