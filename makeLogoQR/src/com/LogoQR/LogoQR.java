@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-class LogoQR {
-	static void combineImage(QRcode qr, Logo lg) {
+public class LogoQR {
+	public static void combineImage(QRcode qr, Logo lg) {
 		BufferedImage imageQR = qr.getImage();
 		BufferedImage imageLogo = lg.getImage();
 		int size = lg.getSize();
@@ -106,14 +106,5 @@ class LogoQR {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	static public void main(String args[]) throws Exception {
-		String information = "http://www.naver.com/";
-		String filePath = "C:\\Users\\PARK\\Desktop\\a\\b2.png";
-		
-		Logo lg = new Logo(filePath);
-		QRcode qr = new QRcode(lg.getSize(), information);
-		combineImage(qr, lg);
 	}
 }

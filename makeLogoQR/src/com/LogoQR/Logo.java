@@ -10,14 +10,14 @@ public class Logo {
 	private BufferedImage image;
 	private int size;
 
-	public Logo(String filePath) {
-		File myFile = new File(filePath);
+	public Logo(File myFile) {
 		try {
 			image = ImageIO.read(myFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("!!");
 
 		size = image.getWidth();
 		if (size != image.getHeight()) {

@@ -3,7 +3,6 @@ package com.LogoQR;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -13,6 +12,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 
 public class QRcode {
 
@@ -35,6 +35,7 @@ public class QRcode {
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
 			QRCodeWriter qrCodeWriter = new QRCodeWriter();
+			System.out.println(information);
 			BitMatrix byteMatrix = qrCodeWriter.encode(information, BarcodeFormat.QR_CODE, size, size, hintMap);
 			int CrunchifyWidth = byteMatrix.getWidth();
 			image = new BufferedImage(CrunchifyWidth, CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
