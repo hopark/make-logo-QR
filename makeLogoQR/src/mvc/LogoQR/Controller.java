@@ -15,10 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Controller extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, CommandHandler> commandHandlerMap = new HashMap<>();
 
 	public void init() throws ServletException {
 		String configFile = getInitParameter("configFile");
+		System.out.println(configFile);
 		Properties prop = new Properties();
 		String configFilePath = getServletContext().getRealPath(configFile);
 		try (FileReader fis = new FileReader(configFilePath)) {
